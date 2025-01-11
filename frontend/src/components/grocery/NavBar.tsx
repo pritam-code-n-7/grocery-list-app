@@ -1,5 +1,5 @@
 import { AvatarDemo } from "@/demo/avatar-demo/AvatarDemo";
-import { Link } from "react-router-dom";
+import { ModeToggle } from "@/theme/ModeToggle";
 
 const NavBar = () => {
   return (
@@ -8,7 +8,7 @@ const NavBar = () => {
         <AvatarDemo />
         <p className="text-lg font-serif">Grocery List App</p>
       </div>
-      <Link to="#" className="font-bold">About us</Link>
+      <ModeToggle />
     </div>
   );
 };

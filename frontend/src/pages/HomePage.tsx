@@ -154,7 +154,7 @@ export function HomePage() {
           <SubmitButton name="Add" type="submit" />
         </form>
       </Form>
-      <ScrollArea className="h-72 w-[500px] rounded-md border bg-slate-100">
+      <ScrollArea className="h-72 w-[500px] rounded-md border bg-slate-100 dark:bg-slate-700 dark:text-black">
         {isLoading ? (
           <LoadingSkeleton />
         ) : isValidating ? (
