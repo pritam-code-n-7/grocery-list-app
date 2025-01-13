@@ -155,17 +155,10 @@ export function HomePage() {
         </form>
       </Form>
       <ScrollArea className="h-72 lg:w-[500px] w-[300px] rounded-md border bg-slate-100 dark:bg-slate-700 dark:text-black">
-        {isLoading ? (
-          <LoadingSkeleton />
-        ) : isValidating ? (
-          <RefreshingIndicator message="Refreshing..." />
-        ) : error ? (
-          <ErrorElement error={error.message} onClick={() => mutate()} />
-        ) : (
+        {isLoading ? (<LoadingSkeleton />) : isValidating ? (<RefreshingIndicator message="Refreshing..." />) : error ? 
+        (<ErrorElement error={error.message} onClick={() => mutate()} />) : (
           <div className="p-4">
-            <h4 className="mb-4 text-xl font-medium leading-none text-amber-500">
-              {data?.length === 0 ? "Your List is Empty" : "Your List"}
-            </h4>
+            <h4 className="mb-4 text-xl font-medium leading-none text-amber-500">{data?.length === 0 ? "Your List is Empty" : "Your List"}</h4>
             {data?.map((grocery: GroceryListType) => (
               <div key={grocery._id} className="dark:text-white">
                 <div className="text-sm">
