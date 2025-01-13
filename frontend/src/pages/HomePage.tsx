@@ -143,7 +143,7 @@ export function HomePage() {
                     placeholder="e.g. Basmati rice - 1kg"
                     {...field}
                     autoFocus
-                    className="w-[435px]"
+                    className="lg:w-[435px] w-[235px]"
                   />
                 </FormControl>
                 <FormMessage />
@@ -154,7 +154,7 @@ export function HomePage() {
           <SubmitButton name="Add" type="submit" />
         </form>
       </Form>
-      <ScrollArea className="h-72 w-[500px] rounded-md border bg-slate-100 dark:bg-slate-700 dark:text-black">
+      <ScrollArea className="h-72 lg:w-[500px] w-[300px] rounded-md border bg-slate-100 dark:bg-slate-700 dark:text-black">
         {isLoading ? (
           <LoadingSkeleton />
         ) : isValidating ? (
@@ -163,11 +163,11 @@ export function HomePage() {
           <ErrorElement error={error.message} onClick={() => mutate()} />
         ) : (
           <div className="p-4">
-            <h4 className="mb-4 text-xl font-medium leading-none">
+            <h4 className="mb-4 text-xl font-medium leading-none text-amber-500">
               {data?.length === 0 ? "Your List is Empty" : "Your List"}
             </h4>
             {data?.map((grocery: GroceryListType) => (
-              <div key={grocery._id}>
+              <div key={grocery._id} className="dark:text-white">
                 <div className="text-sm">
                   <div className="flex justify-between items-center">
                     {grocery.status === true ? (
