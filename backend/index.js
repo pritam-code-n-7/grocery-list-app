@@ -28,10 +28,11 @@ app.use(errorMiddleware);
 
 // server running on this port
 const PORT = process.env.PORT || 5000;
+const HOST = process.env.HOST
 
-app.listen(PORT, (error) => {
+app.listen(PORT,HOST, (error) => {
   if (error) {
     throw error;
   }
-  console.log(`server running on http://localhost:${PORT}`);
+  console.log(`server running on http://${HOST}:${PORT}`);
 });

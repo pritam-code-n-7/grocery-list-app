@@ -1,9 +1,11 @@
 FROM node:lts-slim
 
-WORKDIR /workspace/app
+WORKDIR /app
 
 COPY . .
 
 RUN npm i
+
+EXPOSE 8005
 
 CMD ["npm", "start"]
