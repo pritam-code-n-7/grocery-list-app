@@ -2,9 +2,9 @@ import express from "express";
 import cors from "cors";
 import helmet from "helmet";
 
-import dbConnect from "./config/db.conn.js";
-import groceriesRoute from "./routes/grocery.route.js";
-import { errorMiddleware } from "./middlewares/error.middleware.js";
+import dbConnect from "../config/db.conn.js";
+import groceriesRoute from "../routes/grocery.route.js";
+import { errorMiddleware } from "../middlewares/error.middleware.js";
 
 // express instance
 const app = express();
