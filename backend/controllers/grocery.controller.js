@@ -39,15 +39,12 @@ export const updateItem = async (req, res) => {
 
 export const patchItem = async (req, res) => {
   const { id } = req.params;
-  const data = await Grocery.findByIdAndUpdate(
-    id,
-    {status: true},
-    {new: true }
-  );
+  const item = await Grocery.findById(id)
+  const data = await Grocery.findByIdAndUpdate( id, {status:!item.status},{new: true } );
   console.log(data);
   return res.status(200).json({
     success: true,
-    message: "Item partially updated successfully.",
+    message: "Item checked successfully",
     data
   });
 };

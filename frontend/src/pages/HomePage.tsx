@@ -28,6 +28,8 @@ import { GroceryListType } from "@/types/GroceryListType";
 import axios from "axios";
 import useSWR from "swr";
 
+const API_URL = import.meta.env.VITE_API_URL
+
 const fetcher = (url: string) => axios.get(url).then((res) => res.data);
 
 const FormSchema = z.object({
@@ -45,83 +47,53 @@ export function HomePage() {
   });
 
   // handle fetch data
-  const { data, error, isLoading, isValidating, mutate } = useSWR<
-    GroceryListType[]
-  >(`${import.meta.env.VITE_API_URL}/grocery`, fetcher);
+  const { data, error, isLoading, isValidating, mutate } = useSWR<GroceryListType[]>(`${API_URL}/grocery`, fetcher);
 
   // handle submit data
   async function onSubmit(data: z.infer<typeof FormSchema>) {
     try {
-      const res = await axios.post(
-        `${import.meta.env.VITE_API_URL}/grocery`,
-        data
-      );
+      const res = await axios.post( `${import.meta.env.VITE_API_URL}/grocery`, data);
       console.log(res.data);
       form.reset();
 
-      // re-fetching data
       mutate();
       const { message } = res.data;
-      toast({
-        title: "Congratulations!✅",
-        description: message,
-        variant: "default",
-      });
+      toast({ title: "Success✅", description: message,variant: "default"});
     } catch (error) {
       console.log(error);
-      toast({
-        title: "Sorry!",
-        description: "Unable to submit data.",
-        variant: "destructive",
-      });
+      toast({ title: "Failed", description: "Unable to submit data.", variant: "destructive"});
     }
   }
 
   // handle delete data
   const handleDelete = async (id: string) => {
     try {
-      const res = await axios.delete(
-        `${import.meta.env.VITE_API_URL}/grocery/${id}`
-      );
+      const res = await axios.delete(`${API_URL}/grocery/${id}`);
       console.log(res.data);
+
       const { message } = res.data;
-      toast({
-        title: "Congratulations!✅",
-        description: message,
-        variant: "default",
-      });
+      toast({title: "Success✅", description: message, variant: "default",});
+
       mutate((data) => data?.filter((item) => item._id !== id));
     } catch (error) {
       console.log(error);
-      toast({
-        title: "Sorry!",
-        description: "Unable to delete item.",
-        variant: "destructive",
-      });
+      toast({ title: "Failed",description: "unable to delete item.",variant: "destructive",});
     }
   };
 
   // handle update data
   const handleChecked = async (id: string) => {
     try {
-      const res = await axios.patch(
-        `${import.meta.env.VITE_API_URL}/grocery/${id}`
-      );
+      const res = await axios.patch(`${API_URL}/grocery/${id}`,data);
       console.log(res.data);
+
       mutate();
+
       const { message } = res.data;
-      toast({
-        title: "Congratulations!✅",
-        description: message,
-        variant: "default",
-      });
+      toast({title: "Success✅",description: message,variant: "default",});
     } catch (error) {
       console.log(error);
-      toast({
-        title: "Sorry!",
-        description: "Unable to update item.",
-        variant: "destructive",
-      });
+      toast({title: "Failed", description: "unable to update item",variant: "destructive",});
     }
   };
 
@@ -163,27 +135,11 @@ export function HomePage() {
               <div key={grocery._id} className="dark:text-white">
                 <div className="text-sm">
                   <div className="flex justify-between items-center">
-                    {grocery.status === true ? (
                       <div className="flex items-center gap-2">
-                        <Checkbox checked />
-                        <p className="line-through font-serif">
-                          {grocery.item}
-                        </p>
+                        <Checkbox checked={grocery.status} onCheckedChange={()=> handleChecked(grocery._id)}/>
+                        <p className={`${grocery.status===true ?'line-through':''} font-serif`}>{grocery.item}</p>
                       </div>
-                    ) : (
-                      <div className="flex items-center gap-2">
-                        <Checkbox
-                          onClick={() => handleChecked(grocery._id)}
-                        />
-                        <p className="font-serif">{grocery.item}</p>
-                      </div>
-                    )}
-
-                    <DeleteButton
-                      name="Delete"
-                      type="button"
-                      onClick={() => handleDelete(grocery._id)}
-                    />
+                    <DeleteButton name="Delete"type="button"onClick={() => handleDelete(grocery._id)}/>
                   </div>
                 </div>
                 <Separator className="my-2" />

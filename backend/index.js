@@ -13,7 +13,8 @@ const app = express();
 dbConnect();
 
 // middlewares
-app.use(cors({credentials:true,origin:['https://grocery-list-app-frontend.vercel.app']}))
+app.use(cors({credentials:true,origin:[process.env.FRONTEND_URL]}))
+// app.use(cors())
 app.use(helmet())
 app.use(express.json())
 app.use(express.urlencoded({extended:true}))
