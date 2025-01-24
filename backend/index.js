@@ -23,7 +23,7 @@ app.use(express.urlencoded({extended:true}))
 // routes
 app.use("/api/v1/grocery", groceriesRoute);
 
-// middlewares
+// middleware for route handlers
 app.use(errorMiddleware);
 
 
