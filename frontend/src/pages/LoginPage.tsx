@@ -5,9 +5,9 @@ const LoginPage = () => {
   return (
     <div className="flex flex-col items-center justify-center pt-48 gap-2">
     <LoginForm />
-    <div className="flex items-center gap-2 font-semibold">
-            <p>Not a registered user?</p>
-            <Link to='/signup' className="text-amber-600">Register</Link>
+    <div className="flex items-center text-sm gap-1">
+            <p className="text-gray-500">Dont have an Account? </p>
+            <Link to='/signup' className="text-purple-800 font-semibold">Signup</Link>
         </div>
     </div>
   )
