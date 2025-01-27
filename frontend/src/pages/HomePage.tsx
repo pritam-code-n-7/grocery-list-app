@@ -24,11 +24,10 @@ import LoadingSkeleton from "@/components/grocery/LoadingSkeleton";
 import RefreshingIndicator from "@/components/grocery/RefreshingIndicator";
 import ErrorElement from "@/components/grocery/ErrorElement";
 import { GroceryListType } from "@/types/GroceryListType";
+import {GroceryListURL} from "@/constants"
 
 import axios from "axios";
 import useSWR from "swr";
-
-const API_URL = import.meta.env.VITE_API_URL
 
 const fetcher = (url: string) => axios.get(url).then((res) => res.data);
 
@@ -47,14 +46,14 @@ export function HomePage() {
   });
 
   // handle fetch data
-  const { data, error, isLoading, isValidating, mutate } = useSWR<GroceryListType[]>(`${API_URL}/grocery`, fetcher);
+  const { data, error, isLoading, isValidating, mutate } = useSWR<GroceryListType[]>(GroceryListURL, fetcher);
 
   console.log(data)
 
   // handle submit data
   async function onSubmit(data: z.infer<typeof FormSchema>) {
     try {
-      const res = await axios.post( `${import.meta.env.VITE_API_URL}/grocery`, data);
+      const res = await axios.post( GroceryListURL, data);
       console.log(res.data);
       form.reset();
 
@@ -70,7 +69,7 @@ export function HomePage() {
   // handle delete data
   const handleDelete = async (id: string) => {
     try {
-      const res = await axios.delete(`${API_URL}/grocery/${id}`);
+      const res = await axios.delete(`${GroceryListURL}/${id}`);
       console.log(res.data);
 
       const { message } = res.data;
@@ -86,7 +85,7 @@ export function HomePage() {
   // handle update data
   const handleChecked = async (id: string) => {
     try {
-      const res = await axios.patch(`${API_URL}/grocery/${id}`,data);
+      const res = await axios.patch(`${GroceryListURL}/${id}`,data);
       console.log(res.data);
 
       mutate();

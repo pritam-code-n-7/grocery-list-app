@@ -1,5 +1,6 @@
 import PageNotFound from "@/components/grocery/PageNotFound";
 import MainLayout from "@/layouts/MainLayout";
+import { PrivateRoute, PublicRoute } from "@/lib/helpers";
 import { HomePage } from "@/pages/HomePage";
 import LoginPage from "@/pages/LoginPage";
 import SignupPage from "@/pages/SignupPage";
@@ -9,19 +10,29 @@ export const routes = createBrowserRouter([
   {
     path: "/",
     element: <MainLayout />,
-    errorElement:<PageNotFound />,
+    errorElement: <PageNotFound />,
     children: [
       {
-        path: "/",
-        element: <HomePage />,
+        element: <PublicRoute />,
+        children: [
+          {
+            path: "/signup",
+            element: <SignupPage />,
+          },
+          {
+            path: "/login",
+            element: <LoginPage />,
+          },
+        ],
       },
       {
-        path: "/signup",
-        element: <SignupPage />,
-      },
-      {
-        path: "/login",
-        element: <LoginPage />,
+        element: <PrivateRoute />,
+        children: [
+          {
+            path: "/",
+            element: <HomePage />,
+          },
+        ],
       },
     ],
   },
