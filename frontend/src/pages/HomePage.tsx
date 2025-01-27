@@ -49,6 +49,8 @@ export function HomePage() {
   // handle fetch data
   const { data, error, isLoading, isValidating, mutate } = useSWR<GroceryListType[]>(`${API_URL}/grocery`, fetcher);
 
+  console.log(data)
+
   // handle submit data
   async function onSubmit(data: z.infer<typeof FormSchema>) {
     try {

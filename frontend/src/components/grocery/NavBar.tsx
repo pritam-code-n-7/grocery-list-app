@@ -8,7 +8,10 @@ const NavBar = () => {
         <AvatarDemo />
         <p className="text-lg font-serif">Grocery List App</p>
       </div>
+      <div className="flex items-center gap-4">
+        <p role="button" className="font-bold hover:text-gray-700 transition-all delay-75 duration-150">Logout</p>
       <ModeToggle />
+      </div>
     </div>
   );
 };
