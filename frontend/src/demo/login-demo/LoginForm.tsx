@@ -14,7 +14,7 @@ import { Label } from "@/components/ui/label"
 
 export function LoginForm() {
   return (
-    <Card className="w-[400px] bg-gray-50">
+    <Card className="w-[400px] bg-gray-50 dark:bg-gray-500">
       <CardHeader>
         <CardTitle className="font-bold text-violet-800 text-2xl font-serif">Login</CardTitle>
         <CardDescription>You can login here</CardDescription>
@@ -24,11 +24,11 @@ export function LoginForm() {
           <div className="grid w-full items-center gap-4">
             <div className="flex flex-col space-y-1.5">
               <Label htmlFor="name">Email Id</Label>
-              <Input id="name" type="email" placeholder="e.g. - nandypritam07@gmail.com" required className="bg-white"/>
+              <Input id="name" type="email" placeholder="e.g. - nandypritam07@gmail.com" required className="bg-white dark:bg-black"/>
             </div>
             <div className="flex flex-col space-y-1.5">
               <Label htmlFor="name">Password</Label>
-              <Input id="name" type="password" placeholder="Enter a strong password" required className="bg-white"/>
+              <Input id="name" type="password" placeholder="Enter a strong password" required className="bg-white dark:bg-black"/>
             </div>
           </div>
         </form>
