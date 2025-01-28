@@ -11,10 +11,11 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { LoginURL } from "@/constants"
 import { toast } from "@/hooks/use-toast"
-import { ErrorType } from "@/types/ErrorType"
-import axios from "axios"
 import { UserCircle } from "lucide-react"
 import React, { useState } from "react"
+import { ErrorType } from "@/types/ErrorType"
+
+import axios from "axios"
 import { useNavigate } from "react-router-dom"
 
 
@@ -30,8 +31,10 @@ export function LoginForm() {
 
     try {
       const res  = await axios.post(LoginURL,{email, password})
-      const {errors, status, message, success, jwtToken, _id, name} = res.data;
-      console.log({errors, status, message, success, jwtToken, _id, name});
+
+      const {errors, message, success, jwtToken, _id, name} = res.data;
+      console.log({errors, message, success, jwtToken, _id, name});
+      
       setError(errors)
       if(success)
         {
@@ -40,10 +43,10 @@ export function LoginForm() {
         localStorage.setItem("name",name)
        // localStorage.setItem("email",email)
         navigate('/')
-        toast({title:'Success', description:message, variant:"default"})
+        toast({title:'Success✅', description:message, variant:"default"})
       }
       else {
-        if(status !== 422)
+        if(res.status !== 422)
         {
           console.log(message); 
           toast({title:'Failed', description:message, variant:"destructive"})

@@ -44,7 +44,7 @@ export function SignupForm() {
       if(success)
       {
         navigate('/login')
-        toast({title:'Success', description:message, variant:'default'})
+        toast({title:'Success✅', description:message, variant:'default'})
       }
       else {if(status !== 422)
       {
