@@ -1,4 +1,6 @@
 import { Grocery } from "../models/grocery.model.js";
+import {User} from "../models/user.model.js"
+import { loginValidation } from "../validations/auth.validation.js";
 
 
 export const createItem = async (req, res) => {
@@ -13,9 +15,10 @@ export const createItem = async (req, res) => {
 };
 
 export const getItems = async (req, res) => {
-  const data = await Grocery.find();
-  console.log(data);
-  return res.status(200).json(data);
+    const data = await Grocery.find();
+    console.log(data);
+    return res.status(200).json(data);
+  
 };
 
 export const getItem = async (req, res) => {

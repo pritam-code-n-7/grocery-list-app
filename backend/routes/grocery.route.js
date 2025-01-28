@@ -7,11 +7,13 @@ import {
   patchItem,
   updateItem,
 } from "../controllers/grocery.controller.js";
+import { todoLimiter } from "../config/rateLimits.js";
+import { authMiddleware } from "../middlewares/auth.middleware.js";
 
 const router = express.Router();
 
-router.post("/", createItem);
-router.get("/", getItems);
+router.post("/", todoLimiter, createItem);
+router.get("/", todoLimiter, getItems);
 router.get("/:id", getItem);
 router.put("/:id", updateItem);
 router.patch("/:id", patchItem);

@@ -2,7 +2,8 @@ import jwt from "jsonwebtoken";
 
 export const authMiddleware = (req, res, next)=>{
     const auth = req.headers["authorization"]
-
+    console.log(auth);
+    
     if(!auth)
     {
         return res.status(403).json({success:false, message:"Unauthorized! JWT token is required"})
@@ -10,6 +11,7 @@ export const authMiddleware = (req, res, next)=>{
     
     try{
         const decoded = jwt.verify(auth, process.env.JWT_SECRET)
+        // console.log(process.env.JWT_SECRET);
         req.user = decoded;
         next(); 
     } catch (error) {
