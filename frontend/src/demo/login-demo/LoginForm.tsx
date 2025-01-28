@@ -59,16 +59,16 @@ export function LoginForm() {
     }
   }
   return (
-    <Card className="border-none shadow-none w-[450px] space-y-3">
+    <Card className="border-none shadow-none lg:w-[450px] w-[300px] space-y-3">
       <CardHeader className="flex flex-col gap-5 justify-center items-center ">
         <CardTitle>
           <UserCircle size={48} color="purple"/>
         </CardTitle>
-        <CardDescription className="text-2xl font-bold text-black">Login in to your account</CardDescription>
+        <CardDescription className="lg:text-2xl font-bold font-serif dark:text-white text-black">Login in to your account</CardDescription>
       </CardHeader>
       <CardContent>
         <form onSubmit={handleSignin}>
-          <div className="grid w-full items-center gap-7">
+          <div className="grid w-full items-center lg:gap-7 gap-3">
             <div className="flex flex-col space-y-3">
               <Label htmlFor="email">Email Id</Label>
               <Input 

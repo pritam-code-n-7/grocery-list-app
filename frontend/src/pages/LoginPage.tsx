@@ -3,7 +3,7 @@ import { Link } from "react-router-dom"
 
 const LoginPage = () => {
   return (
-    <div className="flex flex-col items-center justify-center pt-48 gap-2">
+    <div className="flex flex-col items-center justify-center lg:pt-48 pt-20 gap-2">
     <LoginForm />
     <div className="flex items-center text-sm gap-1">
             <p className="text-gray-500">Dont have an Account? </p>

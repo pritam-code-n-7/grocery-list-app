@@ -128,26 +128,36 @@ export function HomePage() {
         </form>
       </Form>
       <ScrollArea className="h-72 lg:w-[500px] w-[300px] rounded-md border bg-slate-100 dark:bg-slate-700 dark:text-black">
-        {isLoading ? (<LoadingSkeleton />) : isValidating ? (<RefreshingIndicator message="Refreshing..." />) : error ? 
-        (<ErrorElement error={error.message} onClick={() => mutate()} />) : (
-          <div className="p-4">
+        {isLoading ? (<LoadingSkeleton />) :  
+
+          isValidating ? (<RefreshingIndicator message="Refreshing..." />) : 
+
+            error ? (<ErrorElement error={error.message} onClick={() => mutate()} />) : 
+            
+          (<div className="p-4">
             <h4 className="mb-4 text-xl font-medium leading-none text-amber-500">{data?.length === 0 ? "Your List is Empty" : "Your List"}</h4>
-            {data?.map((grocery: GroceryListType) => (
-              <div key={grocery._id} className="dark:text-white">
-                <div className="text-sm">
-                  <div className="flex justify-between items-center">
+            {data?.map((grocery: GroceryListType) => 
+              (<div 
+                key={grocery._id} 
+                className="dark:text-white text-sm w-auto">
+                  <div className="flex justify-between items-center gap-2">
                       <div className="flex items-center gap-2">
-                        <Checkbox checked={grocery.status} onCheckedChange={()=> handleChecked(grocery._id)}/>
+                        <Checkbox 
+                          checked={grocery.status} 
+                          onCheckedChange={()=> handleChecked(grocery._id)}/>
                         <p className={`${grocery.status===true ?'line-through':''} font-serif`}>{grocery.item}</p>
                       </div>
-                    <DeleteButton name="Delete"type="button"onClick={() => handleDelete(grocery._id)}/>
-                  </div>
+                      <DeleteButton 
+                      name="Delete"
+                      type="button"
+                      onClick={() => handleDelete(grocery._id)}
+                      />
                 </div>
-                <Separator className="my-2" />
-              </div>
-            ))}
-          </div>
-        )}
+                <Separator className="my-2"/>
+              </div>)
+            )}
+          </div>)
+          }
       </ScrollArea>
     </div>
   );
