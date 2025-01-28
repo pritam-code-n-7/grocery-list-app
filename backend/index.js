@@ -4,6 +4,7 @@ import helmet from "helmet";
 
 import dbConnect from "./config/db.conn.js";
 import groceriesRoute from "./routes/grocery.route.js";
+import usersRoute from "./routes/user.route.js"
 import { errorMiddleware } from "./middlewares/error.middleware.js";
 
 // express instance
@@ -21,6 +22,7 @@ app.use(express.urlencoded({extended:true}))
 
 
 // routes
+app.use("/api/v1", usersRoute);
 app.use("/api/v1/grocery", groceriesRoute);
 
 // middleware for route handlers
