@@ -5,6 +5,11 @@ const grocerySchema = new mongoose.Schema({
         type:String,
         required:true,
     },
+    userId:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:'User',
+        required:false
+    },
     status:{type:Boolean, required:true, default:false}
 },{timestamps:true})
 
