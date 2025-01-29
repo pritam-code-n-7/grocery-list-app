@@ -29,7 +29,7 @@ import {GroceryListURL} from "@/constants"
 import axios from "axios";
 import useSWR from "swr";
 
-const fetcher = (url: string) => axios.get(url).then((res) => res.data);
+const fetcher = (url: string) => axios.get(url,{headers:{Authorization:localStorage.getItem('token')}}).then((res) => res.data);
 
 const FormSchema = z.object({
   item: z.string({ required_error: "This field is required." }).min(2, {
@@ -53,7 +53,7 @@ export function HomePage() {
   // handle submit data
   async function onSubmit(data: z.infer<typeof FormSchema>) {
     try {
-      const res = await axios.post( GroceryListURL, data);
+      const res = await axios.post( GroceryListURL, data, {headers:{Authorization:localStorage.getItem("token")}});
       console.log(res.data);
       form.reset();
 
